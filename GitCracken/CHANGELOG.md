@@ -1,3 +1,10 @@
+# v0.3.8
+
+- Support `GitKraken Pro/Enterprise` v3.3.2
+- Remove `engines` from `package.json`
+- Bump dependencies
+- Better use `Node.js` v9.3.0 and `yarn` v1.3.2
+
 # v0.3.7 - TypeScript to the masses!
 
 - Support `GitKraken Pro/Enterprise` v3.3.1

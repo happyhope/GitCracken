@@ -2,14 +2,10 @@
   "name": "gitcracken",
   "description": "GitKraken utils for non-commercial use",
   "author": "KillWolfVlad",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "license": "GPL-3.0",
   "private": true,
   "homepage": "https://github.com/KillWolfVlad/GitKraken-Pro-AUR",
-  "engines": {
-    "node": "^9.2.x",
-    "yarn": "^1.3.x"
-  },
   "main": "src/index.ts",
   "bin": {
     "gitcracken": "dist/bin/gitcracken.js"
@@ -26,19 +22,19 @@
     "GitKraken"
   ],
   "dependencies": {
-    "@types/fs-extra": "^4.0.5",
-    "@types/node": "8.0.57",
-    "@types/node-emoji": "^1.4.0",
+    "@types/fs-extra": "^5.0.0",
+    "@types/node": "^8.5.1",
+    "@types/node-emoji": "^1.8.0",
     "@types/uuid": "^3.4.3",
     "asar": "^0.14.0",
     "babel-core": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "chalk": "^2.3.0",
-    "commander": "^2.11.0",
+    "commander": "^2.12.2",
     "diff": "^3.4.0",
     "figlet": "^1.2.0",
-    "fs-extra": "^4.0.2",
+    "fs-extra": "^5.0.0",
     "getmac": "^1.2.1",
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.0",

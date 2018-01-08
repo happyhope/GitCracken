@@ -1,6 +1,6 @@
 # GitCracken
 
-`GitKraken` Pro/Enterprise v3.3.1 utils for non-commercial use
+`GitKraken` Pro/Enterprise v3.3.2 utils for non-commercial use
 
 Working on `GNU/Linux`, `Windows` and `macOS`!
 
