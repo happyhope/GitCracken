@@ -1,105 +1,72 @@
-/*****************************************************************************
- * GitCracken - GitKraken utils for non-commercial use                       *
- * Copyright (C) 2017  https://github.com/KillWolfVlad                       *
- *                                                                           *
- * This file is part of GitCracken.                                          *
- *                                                                           *
- * GitCracken is free software: you can redistribute it and/or modify        *
- * it under the terms of the GNU General Public License as published by      *
- * the Free Software Foundation, either version 3 of the License, or         *
- * (at your option) any later version.                                       *
- *                                                                           *
- * GitCracken is distributed in the hope that it will be useful,             *
- * but WITHOUT ANY WARRANTY; without even the implied warranty of            *
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             *
- * GNU General Public License for more details.                              *
- *                                                                           *
- * You should have received a copy of the GNU General Public License         *
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.     *
- *****************************************************************************/
+import * as crypto from "crypto";
 
-import * as crypto from 'crypto';
-import {Decipher} from 'crypto';
-
-import * as fse from 'fs-extra';
+import * as fs from "fs-extra";
 
 /**
- * Password protected file with JSON content
- * This class is fork of https://github.com/maxkorp/secure-storage library
+ * Password protected file with JSON content.
+ * This class is fork of <https://gitlab.com/maxkorp/secure-storage> library
  */
-export class SecFile {
-    /**
-     * File name
-     */
-    private _fileName: string;
+export class SecFile<T = object> {
+  private readonly _fileName: string;
+  private readonly _password: string;
+  private readonly _algorithm: string;
+  private _data?: T;
 
-    /**
-     * Password
-     */
-    private _password: string;
+  /**
+   * Password protected file with JSON content constructor
+   * @param fileName File name
+   * @param password Password
+   * @param algorithm Algorithm
+   */
+  public constructor(
+    fileName: string,
+    password: string,
+    algorithm: string = "aes-256-cbc",
+  ) {
+    this._fileName = fileName;
+    this._password = password;
+    this._algorithm = algorithm;
+  }
 
-    /**
-     * Algorithm
-     */
-    private _algorithm: string;
+  /**
+   * File name
+   */
+  public get fileName(): string {
+    return this._fileName;
+  }
 
-    /**
-     * Data
-     */
-    private _data: object;
+  /**
+   * Password
+   */
+  public get password(): string {
+    return this._password;
+  }
 
-    /**
-     * Password protected file with JSON content constructor
-     * @param {string} fileName File name
-     * @param {string} password Password
-     * @param {string} algorithm Algorithm
-     */
-    public constructor(fileName: string, password: string, algorithm: string = 'aes256') {
-        this._fileName = fileName;
-        this._password = password;
-        this._algorithm = algorithm;
-    }
+  /**
+   * Algorithm
+   */
+  public get algorithm(): string {
+    return this._algorithm;
+  }
 
-    /**
-     * File name
-     * @returns {string}
-     */
-    public get fileName(): string {
-        return this._fileName;
-    }
+  /**
+   * Data
+   */
+  public get data(): T | undefined {
+    return this._data;
+  }
 
-    /**
-     * Password
-     * @returns {string}
-     */
-    public get password(): string {
-        return this._password;
-    }
-
-    /**
-     * Algorithm
-     * @returns {string}
-     */
-    public get algorithm(): string {
-        return this._algorithm;
-    }
-
-    /**
-     * Data
-     * @returns {object}
-     */
-    public get data(): object {
-        return this._data;
-    }
-
-    /**
-     * Read data from disk
-     */
-    public read(): void {
-        const decipher: Decipher = crypto.createDecipher(this._algorithm, this._password);
-        this._data = JSON.parse(Buffer.concat([
-            decipher.update(fse.readFileSync(this._fileName)),
-            decipher.final()
-        ]).toString('utf8'));
-    }
+  /**
+   * Read data from disk
+   * @throws Error
+   */
+  public read(): void {
+    const decipher = crypto.createDecipher(this.algorithm, this.password); // TODO: deprecated!
+    this._data = JSON.parse(
+      Buffer.concat([
+        decipher.update(fs.readFileSync(this.fileName)),
+        decipher.final(),
+      ]).toString("utf8"),
+    );
+  }
 }

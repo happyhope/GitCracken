@@ -2,52 +2,50 @@
   "name": "gitcracken",
   "description": "GitKraken utils for non-commercial use",
   "author": "KillWolfVlad",
-  "version": "0.3.8",
-  "license": "GPL-3.0",
+  "version": "0.6.2",
+  "license": "MIT",
   "private": true,
-  "homepage": "https://github.com/KillWolfVlad/GitKraken-Pro-AUR",
-  "main": "src/index.ts",
+  "homepage": "https://pastebin.com/u/KillWolfVlad",
+  "main": "dist/index.js",
   "bin": {
     "gitcracken": "dist/bin/gitcracken.js"
   },
-  "files": [
-    "bin",
-    "src",
-    "CHANGELOG.md",
-    "LICENSE",
-    "README.md"
-  ],
-  "keywords": [
-    "GitCracken",
-    "GitKraken"
-  ],
-  "dependencies": {
-    "@types/fs-extra": "^5.0.0",
-    "@types/node": "^8.5.1",
-    "@types/node-emoji": "^1.8.0",
-    "@types/uuid": "^3.4.3",
-    "asar": "^0.14.0",
-    "babel-core": "^6.26.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.6.1",
-    "chalk": "^2.3.0",
-    "commander": "^2.12.2",
-    "diff": "^3.4.0",
-    "figlet": "^1.2.0",
-    "fs-extra": "^5.0.0",
-    "getmac": "^1.2.1",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^7.0.0",
-    "gulp-sourcemaps": "^2.6.1",
-    "gulp-typescript": "^3.2.3",
-    "jsonfile": "^4.0.0",
-    "node-emoji": "^1.8.1",
-    "rimraf": "^2.6.2",
-    "typescript": "^2.6.2",
-    "uuid": "^3.1.0"
-  },
   "scripts": {
-    "build": "rimraf dist && gulp",
-    "postinstall": "rimraf dist && gulp"
-  }
+    "build": "rimraf dist && tsc",
+    "gitcracken": "node dist/bin/gitcracken.js",
+    "gitcracken:dev": "node $NODE_DEBUG_OPTION -r ts-node/register bin/gitcracken.ts",
+    "lint": "tslint -p tsconfig.json"
+  },
+  "dependencies": {
+    "asar": "^2.0.1",
+    "chalk": "^2.4.2",
+    "commander": "^2.20.0",
+    "diff": "^4.0.1",
+    "figlet": "^1.2.3",
+    "fs-extra": "^8.1.0",
+    "getmac": "^1.4.6",
+    "natsort": "^2.0.2",
+    "node-emoji": "^1.10.0",
+    "pkg-dir": "^4.2.0",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/diff": "^4.0.2",
+    "@types/figlet": "^1.2.0",
+    "@types/fs-extra": "^8.0.0",
+    "@types/node": "^12.0.10",
+    "@types/node-emoji": "^1.8.1",
+    "@types/uuid": "^3.4.4",
+    "prettier": "^1.18.2",
+    "rimraf": "^2.6.3",
+    "ts-node": "^8.3.0",
+    "tslint": "^5.18.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.0.1",
+    "typescript": "^3.5.2"
+  },
+  "files": [
+    "dist",
+    "patches"
+  ]
 }
