@@ -1,6 +1,6 @@
 --- src/main/static/startMainProcess.js
 +++ src/main/static/startMainProcess.js
-@@ -1,4 +1,21 @@
+@@ -1,4 +1,19 @@
  /* eslint-disable no-console */
 +
 +function patchSnapshot() {
@@ -8,13 +8,11 @@
 +  var { decodeBody } = RegistrationHelpers;
 +  RegistrationHelpers.decodeBody = (isNormalClient, modePrefixString, body) => {
 +    var result = decodeBody(isNormalClient, modePrefixString, body);
-+    console.log(result);
 +    result = {
 +      ...result,
 +      licensedFeatures: ['pro'],
 +      proAccessState: {}
 +    }
-+    console.log(result);
 +    return result;
 +  }
 +}
@@ -22,7 +20,7 @@
  (function() {
    require('../../sharedModules/static/loadSnapshot');
    if (process.env.GITKRAKEN_RUN_MAIN_TESTS) {
-@@ -27,6 +44,7 @@
+@@ -27,6 +42,7 @@
    global.mode = buildMode;
  
    if (typeof snapshotResult !== 'undefined') {
