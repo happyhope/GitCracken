@@ -6,14 +6,14 @@
 +function patchSnapshot() {
 +  var RegistrationHelpers = snapshotResult.customRequire('./src/sharedModules/registration/shared/RegistrationHelpers.js');
 +  var { decodeBody } = RegistrationHelpers;
-+  RegistrationHelpers.decodeBody = (isNormalClient, modePrefixString, body) => {
-+    var result = decodeBody(isNormalClient, modePrefixString, body);
-+    result = {
-+      ...result,
++  RegistrationHelpers.decodeBody = function() {
++    var body = decodeBody(...arguments);
++    body = {
++      ...body,
 +      licensedFeatures: ['pro'],
 +      proAccessState: {}
 +    }
-+    return result;
++    return body;
 +  }
 +}
 +
