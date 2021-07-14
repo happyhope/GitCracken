@@ -18,9 +18,9 @@
 +}
 +
  (function() {
-   require('../../sharedModules/static/loadSnapshot');
-   if (process.env.GITKRAKEN_RUN_MAIN_TESTS) {
-@@ -27,6 +42,7 @@
+   if (process.env.GITKRAKEN_OPEN_MAIN_DEV_TOOLS) {
+     require('./startDevTools');
+@@ -32,6 +47,7 @@
    global.mode = buildMode;
  
    if (typeof snapshotResult !== 'undefined') {
