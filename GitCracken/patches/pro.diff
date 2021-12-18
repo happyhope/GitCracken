@@ -18,13 +18,13 @@
 +}
 +
  (function() {
-   if (process.env.GITKRAKEN_OPEN_MAIN_DEV_TOOLS) {
-     require('./startDevTools');
-@@ -32,6 +47,7 @@
-   global.mode = buildMode;
+   // Webpack will remove the if block when you use process.env.NODE_ENV
+   if (process.env.NODE_ENV === 'development') {
+@@ -34,6 +49,6 @@
  
-   if (typeof snapshotResult !== 'undefined') {
-+    patchSnapshot();
-     const path = require('path');
-     snapshotResult.setGlobals(global, process, global, {}, console, require, path.resolve());
-     snapshotResult.customRequire('./src/main/main.js');
+   global.clientType = clientType;
+   global.mode = buildMode;
+-
++  patchSnapshot();
+   require('../main.js');
+ })();
